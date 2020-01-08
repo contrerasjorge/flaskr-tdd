@@ -2,21 +2,21 @@ import os
 import unittest
 import tempfile
 
-from app import app
+import app
 
 
 class BasicTestCase(unittest.TestCase):
 
     def test_index(self):
         """Initial test: Ensure flask was set up correctly."""
-        tester = app.test_client(self)
+        tester = app.app.test_client(self)
         response = tester.get('/', content_type='html/text')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
 
     def test_database(self):
         """Initial test: Ensure that the database exists."""
         tester = os.path.exists("flaskr.db")
-        self.assertTrue(tester)
+        self.assertEqual(tester, True)
 
 
 class FlaskrTestCase(unittest.TestCase):
